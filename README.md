@@ -49,8 +49,7 @@ start index.html
 - Inline SVG diagrams ทุกภาพ (มี `aria-label` รองรับ screen reader)
 - Mobile responsive + สารบัญ sticky พร้อม active-section highlight
 - ปุ่มคัดลอกโค้ด/prompt ในตัว
-- มี light/dark mode (จำค่าด้วย localStorage)
-- ฟอนต์ใช้ system font stack ที่รองรับภาษาไทย (ไม่โหลดฟอนต์ภายนอก)
+- ธีมกระดาษ teal/amber ชุดเดียวกับ handbook เล่มอื่น (Anuphan · Bai Jamjuree · IBM Plex Mono)
 
 ---
 
