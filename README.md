@@ -30,6 +30,7 @@ start index.html
 | 07 | **Compound the Brain** — ลูปบำรุงรักษาข้ามคืนด้วย scheduled task |
 | 08 | **Playbook** — แผนติดตั้ง 7 วัน + checklist |
 | 09 | **กับดักที่พบบ่อย** — ปัญหายอดฮิตและวิธีแก้ |
+| 10 | **ภาคผนวก: เชื่อม Claude Code** — `CLAUDE.md`, คำสั่งใช้งานจริง, ตั้ง `/schedule` |
 
 ## ไฟล์
 
@@ -48,6 +49,7 @@ start index.html
 - Inline SVG diagrams ทุกภาพ (มี `aria-label` รองรับ screen reader)
 - Mobile responsive + สารบัญ sticky พร้อม active-section highlight
 - ปุ่มคัดลอกโค้ด/prompt ในตัว
+- มี light/dark mode (จำค่าด้วย localStorage)
 - ฟอนต์ใช้ system font stack ที่รองรับภาษาไทย (ไม่โหลดฟอนต์ภายนอก)
 
 ---

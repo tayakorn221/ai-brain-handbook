@@ -17,6 +17,13 @@
     --font:"Segoe UI","IBM Plex Sans Thai","Noto Sans Thai",-apple-system,system-ui,"Sarabun",sans-serif;
     --mono:"Cascadia Code","JetBrains Mono","Consolas","Sarabun",ui-monospace,monospace;
   }
+  body.light{
+    --bg:#f7f8fa; --bg2:#ffffff; --bg3:#eef1f5;
+    --line:#e3e7ee; --line2:#cdd5e0;
+    --fg:#16202e; --fg2:#4a5568; --fg3:#7d8a9c;
+    --accent:#3b5bdb; --accent2:#0d9488; --warn:#b07d12;
+  }
+  body.light .toc{box-shadow:none}
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{
@@ -113,6 +120,12 @@
   footer{border-top:1px solid var(--line); margin-top:80px; padding:28px 0;
     color:var(--fg3); font-size:.85rem}
 
+  .themebtn{position:fixed; top:14px; right:16px; z-index:60; width:40px; height:40px;
+    border-radius:50%; background:var(--bg2); color:var(--fg); border:1px solid var(--line2);
+    cursor:pointer; font-size:1rem; line-height:1; display:grid; place-items:center;
+    box-shadow:0 2px 10px #0004}
+  .themebtn:hover{border-color:var(--accent)}
+
   /* mobile */
   .menubtn{display:none}
   @media (max-width:920px){
@@ -149,6 +162,8 @@
     <h2>ลงมือทำ</h2>
     <a href="#playbook"><span class="num">08</span>Playbook 7 วัน</a>
     <a href="#pitfalls"><span class="num">09</span>กับดักที่พบบ่อย</a>
+    <h2>ภาคผนวก</h2>
+    <a href="#claude-code"><span class="num">10</span>เชื่อม Claude Code</a>
   </nav>
 
   <main>
@@ -585,6 +600,62 @@
       <p class="lede" style="margin-top:32px">ผลลัพธ์เมื่อระบบครบ: สั่งสั้น ๆ ว่า "ส่งคำเชิญให้ John" แล้ว AI รู้ทันทีว่าใคร อีเมลอะไร โปรเจกต์ไหน เพราะมันเดินตามลิงก์ใน Vault ได้ — ระบบนี้ซื้อเวลาชีวิตคืนมาให้คุณมหาศาล</p>
     </section>
 
+    <hr>
+
+    <!-- ===== 10 CLAUDE CODE ===== -->
+    <section id="claude-code">
+      <h2><span class="ch">10</span>ภาคผนวก — เชื่อม Claude Code กับ Vault</h2>
+      <p class="lede">ถ้าคุณใช้ Claude Code (CLI) อยู่แล้ว นี่คือวิธีทำให้ "สมอง" ทำงานเต็มสูบ — Claude Code อ่าน/เขียนไฟล์ใน Vault ได้ตรง ๆ และตั้ง schedule บำรุงรักษาเองได้ ไม่ต้องพึ่ง connector</p>
+
+      <h3>1. วาง CLAUDE.md ที่รากของ Vault</h3>
+      <p>Claude Code จะอ่าน <code>CLAUDE.md</code> อัตโนมัติทุกครั้งที่เปิดในโฟลเดอร์นั้น — ใช้ไฟล์นี้ "ชี้ทาง" ให้มันโหลดตัวตนและรู้กติกาของ Vault</p>
+      <div class="code">
+        <div class="bar"><span>Brain/CLAUDE.md</span><button class="copy">คัดลอก</button></div>
+<pre><code># Vault นี้คือ "สมองที่สอง" ของฉัน
+
+ก่อนตอบทุกครั้ง ให้อ่าน:
+- _System/user.md      (ฉันคือใคร)
+- _System/soul.md      (น้ำเสียง + คำต้องห้าม)
+- _System/identity.md  (บทบาทของนาย)
+
+กติกา:
+- พูดถึงคน/โปรเจกต์/บริษัท ต้องลิงก์ด้วย [[ชื่อไฟล์]] เสมอ
+- ข้อมูลใหม่ให้เก็บลงโฟลเดอร์ที่ถูกต้อง (People/ Projects/ ...)
+- อ้างอิงคำตอบจากไฟล์ใน Vault ระบุไฟล์ที่ใช้
+- ไม่รู้ให้บอกว่าไม่รู้ ห้ามเดา</code></pre>
+      </div>
+
+      <h3>2. ตัวอย่างคำสั่งใช้งานจริง</h3>
+      <div class="tablewrap">
+      <table>
+        <tr><th>พิมพ์สั้น ๆ</th><th>Claude Code ทำอะไร</th></tr>
+        <tr><td>"สรุปทุกอย่างที่รู้เกี่ยวกับ John"</td><td>อ่าน <code>People/John.md</code> + ไฟล์ที่ลิงก์ถึง แล้วสรุป</td></tr>
+        <tr><td>"โปรเจกต์ Q3 ค้างอะไรอยู่"</td><td>เปิด <code>Projects/</code> รวม commitments ที่ยังไม่ติ๊ก</td></tr>
+        <tr><td>"ฉันเคยตัดสินใจเรื่องจ้างดีไซเนอร์ว่าไง"</td><td>ดึงจาก <code>Decisions/</code> พร้อมเหตุผลตอนนั้น</td></tr>
+        <tr><td>"เขียนสรุปประชุมวันนี้ลง Meetings/"</td><td>สกัด 4 ส่วนแล้วสร้างไฟล์ <code>.md</code> + ลิงก์อัตโนมัติ</td></tr>
+      </table>
+      </div>
+
+      <h3>3. ตั้งบำรุงรักษาอัตโนมัติด้วย /schedule</h3>
+      <p>ใช้ skill <code>/schedule</code> ของ Claude Code ตั้ง cron ให้รัน prompt บำรุงรักษา (บท 07) ทุกคืน ชี้ไปที่โฟลเดอร์ Vault</p>
+      <div class="code">
+        <div class="bar"><span>Claude Code · /schedule</span><button class="copy">คัดลอก</button></div>
+<pre><code>/schedule ทุกวันเวลา 23:00 ให้เปิดโฟลเดอร์ Brain แล้วรัน
+prompt บำรุงรักษารายคืน: เชื่อม orphan notes, สร้างไฟล์คน/
+บริษัทใหม่, รวมข้อมูลซ้ำ, อัปเดต MOC, สรุปให้ฉัน 5 บรรทัด</code></pre>
+      </div>
+
+      <div class="note tip">
+        <span class="label">💡 ทำไมวิธีนี้เหนือกว่า</span>
+        ไฟล์เป็นของคุณ 100% ในเครื่อง · ไม่มี vendor lock-in · Claude Code แก้หลายไฟล์พร้อมกันได้ · ใช้ git เวอร์ชันสมองได้ (ย้อนดูว่าสมองโตยังไงในแต่ละวัน)
+      </div>
+
+      <div class="note warn">
+        <span class="label">⚠️ เรื่องความเป็นส่วนตัว</span>
+        Vault มีข้อมูลคน/ธุรกิจที่ละเอียดอ่อน — อย่า push ขึ้น public repo, ใส่ <code>.gitignore</code> หรือใช้ private repo, และเลี่ยงเก็บความลับ (รหัสผ่าน/เลขบัตร) ลงไฟล์ <code>.md</code> ตรง ๆ
+      </div>
+    </section>
+
     <footer>
       <div>AI Brain Handbook · คู่มือสร้างสมองที่สองด้วย AI</div>
       <div style="margin-top:6px">แนวคิดต้นทาง: <a href="https://www.youtube.com/watch?v=b4d32pBa3UY" target="_blank" rel="noopener">Dan Martell</a> · เรียบเรียง &amp; ขยายความเป็นภาษาไทย</div>
@@ -594,6 +665,7 @@
 </div>
 
 <button class="menubtn" id="menubtn" aria-label="เปิดสารบัญ">☰</button>
+<button class="themebtn" id="themebtn" aria-label="สลับธีมสว่าง/มืด" title="สลับธีม">☀️</button>
 <div class="scrim" id="scrim"></div>
 
 <script>
@@ -607,6 +679,18 @@
       });
     });
   });
+
+  // theme toggle
+  var tb=document.getElementById('themebtn');
+  function setTheme(t){
+    document.body.classList.toggle('light', t==='light');
+    tb.textContent = t==='light' ? '🌙' : '☀️';
+    try{ localStorage.setItem('aibrain-theme', t); }catch(e){}
+  }
+  tb.addEventListener('click', function(){
+    setTheme(document.body.classList.contains('light') ? 'dark' : 'light');
+  });
+  try{ var saved=localStorage.getItem('aibrain-theme'); if(saved) setTheme(saved); }catch(e){}
 
   // mobile toc
   var toc=document.getElementById('toc'), btn=document.getElementById('menubtn'), scrim=document.getElementById('scrim');
