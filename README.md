@@ -2,7 +2,7 @@
 
 คู่มือสร้าง "สมอง AI" (Second Brain) ฉบับเข้าใจถึงแก่น — สร้างคลังความจำถาวรที่ AI อ่าน จดจำตัวตนของคุณ เชื่อมโยงข้อมูลเอง และพัฒนาตัวเองได้ทุกคืน
 
-📖 อ่านออนไลน์: เปิดไฟล์ [`index.html`](index.html) ในเบราว์เซอร์ (HTML ไฟล์เดียวจบ ไม่มี dependency)
+📖 อ่านออนไลน์: **https://tayakorn221.github.io/ai-brain-handbook/** (HTML ไฟล์เดียวจบ ไม่มี dependency)
 
 ## Why this exists
 
